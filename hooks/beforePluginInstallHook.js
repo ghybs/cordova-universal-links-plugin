@@ -52,7 +52,7 @@ module.exports = function(ctx) {
 
   console.log("\nRunning npm install...\n");
 
-  shell.exec(cmd, function(code, stdout, stderr) {
+  var test = shell.exec(cmd, {async: false}, function (code, stdout, stderr) {
     console.log('Exit code:', code);
     console.log('Program output:', stdout);
     console.log('Program stderr:', stderr);
@@ -61,6 +61,8 @@ module.exports = function(ctx) {
       throw stderr;
     }
   });
+  
+  console.log("\nshelljs Result: " + JSON.stringify(test));
 
   console.log("\nRun npm install\n");
 
