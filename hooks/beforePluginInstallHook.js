@@ -62,7 +62,9 @@ module.exports = function(ctx) {
     }
   });
   
-  console.log("\nshelljs Result: " + test);
+  console.log("\nshelljs exit code: " + test.code);
+  console.log("\nshelljs stdout: " + test.stdout);
+  console.log("\nshelljs stderr: " + test.stderr);
 
   console.log("\nRun npm install\n");
 
