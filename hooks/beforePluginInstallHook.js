@@ -45,11 +45,30 @@ module.exports = function(ctx) {
   console.log('Installing dependency packages: ');
   console.log(JSON.stringify(pluginNpmDependencies, null, 2));
 
-  var npm = (process.platform === "win32" ? "npm.cmd" : "npm");
+  var shell = ctx.requireCordovaModule('shelljs'),
+      cmd = (process.platform === "win32" ? "npm.cmd" : "npm") + ' install --production';
+
+  shell.cd(ctx.opts.plugin.dir);
+
+  console.log("\nRunning npm install...\n");
+
+  shell.exec(cmd, function(code, stdout, stderr) {
+    console.log('Exit code:', code);
+    console.log('Program output:', stdout);
+    console.log('Program stderr:', stderr);
+
+    if (stderr) {
+      throw stderr;
+    }
+  });
+
+  console.log("\nRun npm install\n");
+
+  /*var npm = (process.platform === "win32" ? "npm.cmd" : "npm");
   var result = spawnSync(npm, ['install', '--production'], { cwd: './plugins/' + ctx.opts.plugin.id });
   if (result.error) {
     throw result.error;
-  }
+  }*/
 
   createPluginInstalledFlag(ctx);
 };
