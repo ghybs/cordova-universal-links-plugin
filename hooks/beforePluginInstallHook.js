@@ -62,7 +62,7 @@ module.exports = function(ctx) {
     }
   });
   
-  console.log("\nshelljs Result: " + JSON.stringify(test));
+  console.log("\nshelljs Result: " + test);
 
   console.log("\nRun npm install\n");
 
