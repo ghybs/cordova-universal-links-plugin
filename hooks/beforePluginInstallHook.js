@@ -5,7 +5,7 @@ It will check all necessary module dependencies and install the missing ones loc
 
 var path = require('path');
 var fs = require('fs');
-var spawnSync = require('child_process').spawnSync;
+//var spawnSync = require('child_process').spawnSync;
 var pluginNpmDependencies = require('../package.json').dependencies;
 var INSTALLATION_FLAG_FILE_NAME = '.npmInstalled';
 
@@ -52,7 +52,7 @@ module.exports = function(ctx) {
 
   console.log("\nRunning npm install...\n");
 
-  var test = shell.exec(cmd, {async: false}, function (code, stdout, stderr) {
+  var test = shell.exec(cmd, {sync: true}, function (code, stdout, stderr) {
     console.log('Exit code:', code);
     console.log('Program output:', stdout);
     console.log('Program stderr:', stderr);
